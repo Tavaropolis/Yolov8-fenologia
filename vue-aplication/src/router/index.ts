@@ -8,6 +8,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: MainView
+    },
+    { 
+      //Rota pega tudo
+      path: '/:catchAll(.*)', 
+      redirect: '/'
     }
     // {
     //   path: '/about',
