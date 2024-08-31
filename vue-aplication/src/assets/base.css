@@ -19,6 +19,8 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
+  --vt-c-light-green: #3ea657;
 }
 
 /* semantic color variables for this project */
@@ -31,7 +33,10 @@
   --color-border-hover: var(--vt-c-divider-light-1);
 
   --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+  --color-text: var(--vt-c-white-soft);
+  --color-text-focus: var(--vt-c-text-dark-2);
+
+  --color-navbar: var(--vt-c-light-green);
 
   --section-gap: 160px;
 }
@@ -46,7 +51,8 @@
     --color-border-hover: var(--vt-c-divider-dark-1);
 
     --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
+    --color-text: var(--vt-c-white-soft);
+    --color-text-focus: var(--vt-c-text-dark-2);
   }
 }
 
