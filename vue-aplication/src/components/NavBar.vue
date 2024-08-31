@@ -18,13 +18,13 @@ import { RouterLink } from 'vue-router';
 <style scoped>
 .nav-bar {
     width: 100vw;
-    height: 5vh;
+    height: 6vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background: var(--menu-color);
+    background: var(--color-navbar);
 }
 
 .nav-logo {
@@ -41,8 +41,13 @@ ul {
 }
 
 ul li a {
+    color: var( --color-text);
+    text-decoration: none;
+}
+
+ul li a:hover {
     cursor: pointer;
-    color: var( --text-color);
+    color: var( --color-text-focus);
     text-decoration: none;
 }
 </style>
