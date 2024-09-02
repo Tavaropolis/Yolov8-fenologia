@@ -22,3 +22,6 @@
 display: none; /* Ocultar as setas de rolagem (opcional) */
 }
 
+html {
+    scroll-behavior: smooth;
+}
