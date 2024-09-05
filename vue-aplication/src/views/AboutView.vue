@@ -1,5 +1,6 @@
 <script setup>
 import NavBar from "../components/NavBar.vue";
+import References from "../components/References.vue";
 
 </script>
 
@@ -34,15 +35,16 @@ import NavBar from "../components/NavBar.vue";
         </section>
         <section class="buffer" id="topic3">
             <h2>O que é fenologia?</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ab dignissimos pariatur neque ipsum corporis numquam voluptatem ex. Cupiditate neque earum quisquam similique ducimus architecto cumque autem, quia nemo minus.</p>
+            <p>A fenologia é o estudo da ocorrência de eventos biológicos recorrentes e sua relação com mudanças ambientais bióticas e abióticas em uma ou mais espécies </p>
         </section>
         <section class="buffer" id="topic4">
             <h2>O que é R-CNN?</h2>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa nemo, corporis tenetur officia doloribus vel provident ad? Molestiae aperiam provident, harum ut nostrum tempora repellendus eum expedita animi, quas tenetur?</p>
+            <p>&emsp;CNN (Convolutional Neural Networks) é uma forma de se obter a classificação de uma imagem, através de redes neurais profundas, o deeplearning. O CNN se utiliza de "kernels" formados por fórmulas matemáticas, que analisam uma determinada matriz de pixels por vez, até passar por toda a imagem. Esses kernels tem a capacidade de identificar certas características da imagem, por exemplo, um pode identidicar pontas, ou kernel pode identificar blur, e assim por diante. Após o resultado obtido o CNN classifica a imagem conforme o treinamento aplicado. Por exemplo: alimenta-se o CNN com várias imagens classificadas como sendo um cachorro, o CNN aprende as características que formam esse tipo de imagem, e ao ser alimentado com outra imagem, ele saberá classificar se é um cachorro ou não.</p>
+            <p>&emsp; Este modelo entretanto tem suas limitações</p>
         </section>
         <div class="parallax" id="img-2"></div>
         <section class="buffer" id="topic5">
-            <h2>Referências Bibliográficas</h2>
+            <References/>
         </section>
     </main>
 </template>
