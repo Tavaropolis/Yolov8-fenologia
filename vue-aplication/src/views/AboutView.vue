@@ -4,6 +4,7 @@ import References from "../components/References.vue";
 import AboutApp from "../components/AboutApp.vue";
 import AboutAI from "../components/AboutAI.vue";
 import AboutFeno from '../components/AboutFeno.vue';
+import AboutRCNN from "../components/AboutRCNN.vue"
 
 </script>
 
@@ -31,7 +32,7 @@ import AboutFeno from '../components/AboutFeno.vue';
             <AboutFeno/>
         </section>
         <section class="buffer" id="topic4">
-            <AboutCNN/>
+            <AboutRCNN/>
         </section>
         <div class="parallax" id="img-2"></div>
         <section class="buffer" id="topic5">
