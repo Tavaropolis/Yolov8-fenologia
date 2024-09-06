@@ -1,6 +1,9 @@
 <script setup>
 import NavBar from "../components/NavBar.vue";
 import References from "../components/References.vue";
+import AboutApp from "../components/AboutApp.vue";
+import AboutAI from "../components/AboutAI.vue";
+import AboutFeno from '../components/AboutFeno.vue';
 
 </script>
 
@@ -18,15 +21,7 @@ import References from "../components/References.vue";
     </summary>
     <main>
         <section class="buffer" id="topic1">
-            <h2>Como funciona a aplicação?</h2>
-            <p>&emsp;Esta aplicação calcula a intensidade da presença foliar em espécies árboreas de acordo com a escala de Founier. Esta escala é utilizada em muitos trabalhos das áreas de botânica e fenologia, ela consiste em classificar um atríbuto (também chamada de fenofase) como presença de folhas ou presença de flores, em uma escala de 0 a 4, em relação a presença e a área total da copa da árvore. Por exemplo: se não houver folhas na copa de uma árvore, ela seria indíce 0, se houvesse entre 1% a 25%, ela seria indíce 1, de 26% a 50%, indíce 2, 51% a 75% indice 3 e por fim 76% a 100% indíce 4.</p>
-            <p>&emsp;Este projeto consiste em receber uma imagem de árvore do usuário, e envia-la para um modelo de Inteligência Artificial treinado na arquitetura Mask-RCNN via linguagem Python. Ela analisará a imagem e retornará o indíce de Fournier correspondente. </p>
-            <p>Basta seguir os seguintes passos: </p>
-            <ul>
-                <li>Acesse a aba <RouterLink to="/">Home</RouterLink></li>
-                <li>Faça o upload da imagem ou arraste para a área de drop</li>
-                <li>Aguarde o resultado ainda na aba principal</li>
-            </ul>
+            <AboutApp/>
         </section>
         <div class="parallax" id="img-1"></div>
         <section class="buffer" id="topic2">
@@ -34,13 +29,12 @@ import References from "../components/References.vue";
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ab dignissimos pariatur neque ipsum corporis numquam voluptatem ex. Cupiditate neque earum quisquam similique ducimus architecto cumque autem, quia nemo minus.</p>
         </section>
         <section class="buffer" id="topic3">
-            <h2>O que é fenologia?</h2>
-            <p>A fenologia é o estudo da ocorrência de eventos biológicos recorrentes e sua relação com mudanças ambientais bióticas e abióticas em uma ou mais espécies </p>
+            <AboutFeno/>
         </section>
         <section class="buffer" id="topic4">
             <h2>O que é R-CNN?</h2>
             <p>&emsp;CNN (Convolutional Neural Networks) é uma forma de se obter a classificação de uma imagem, através de redes neurais profundas, o deeplearning. O CNN se utiliza de "kernels" formados por fórmulas matemáticas, que analisam uma determinada matriz de pixels por vez, até passar por toda a imagem. Esses kernels tem a capacidade de identificar certas características da imagem, por exemplo, um pode identidicar pontas, ou kernel pode identificar blur, e assim por diante. Após o resultado obtido o CNN classifica a imagem conforme o treinamento aplicado. Por exemplo: alimenta-se o CNN com várias imagens classificadas como sendo um cachorro, o CNN aprende as características que formam esse tipo de imagem, e ao ser alimentado com outra imagem, ele saberá classificar se é um cachorro ou não.</p>
-            <p>&emsp; Este modelo entretanto tem suas limitações</p>
+            <p>&emsp; Este modelo entretanto tem suas limitações, sendo relativamente desafiador identificar quando a mais de um mesmo objeto na imagem e classifica-la. Para resolver esses desafios é utilizado a abordagem R-CNN. A principal diferença desta abordagem é que há uma classificação de zonas de interesse por padrões na imagem, antes da aplicação dos kernels.</p>
         </section>
         <div class="parallax" id="img-2"></div>
         <section class="buffer" id="topic5">
