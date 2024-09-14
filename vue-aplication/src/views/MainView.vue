@@ -1,17 +1,13 @@
 <script setup>
+import axios from 'axios';
 import NavBar from "../components/NavBar.vue"
 
-const dropZoneOpenFolder = (() => {
-  const imgFolder = document.getElementById("imgFolder");
-  imgFolder.setAttribute("src", "../assets/folderOpen.svg");
+const buttonFileLoad = (async (e) => {
+  const fileArray = [...e.target.files];
+  uploadImage(await toBase64(fileArray[0]));
 });
 
-const dropZoneCloseFolder = (() => {
-  const imgFolder = document.getElementById("imgFolder");
-  imgFolder.setAttribute("src", "../assets/folder.svg");
-});
-
-const dropZoneAction = ((e) => {
+const dropZoneAction = (async (e) => {
   const dropZoneMsg = document.getElementById("dropZoneMsg");
 
   if(e.dataTransfer.items[0].kind !== "file") {
@@ -24,19 +20,47 @@ const dropZoneAction = ((e) => {
     throw new Error("More than one file"); 
   }
 
-  if(e.dataTransfer.items[0].type !== 'image/jpeg' && e.dataTransfer.items[0].type !== 'image/png') {
+  if(e.dataTransfer.items[0].type !== 'image/jpeg' && e.dataTransfer.items[0].type !== 'image/png' && e.dataTransfer.items[0].type !== 'image/webp') {
     dropZoneMsg.innerText = "Erro: Não é uma imagem";
     throw new Error("Not an image"); 
   }
 
   const fileArray = [...e.dataTransfer.files];
-  uploadImage(fileArray[0]);
+  uploadImage(await toBase64(fileArray[0]));
 })
 
-const uploadImage = ((file) => {
-  console.log(file);
+const toBase64 = ( (file) => {
+  return new Promise ((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (() => {
+      resolve(reader.result);
+    })
+    reader.onerror = reject;
+  })
 })
 
+const uploadImage = (async (image) => {
+  try {
+    const response = await axios({
+      method: "POST",
+      url: "https://detect.roboflow.com/fenologia-tcc/3",
+      params: {
+          api_key: "xrqu1dH2PN1Ga56djekh"
+      },
+      data: image,
+      headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Access-Control-Allow-Origin": "*"
+      }
+    })
+
+    console.log(response);
+  } catch(e) {
+    console.log(e);
+    throw new Error("Failed in request image");
+  }
+})
 </script>
 
 <template>
@@ -44,9 +68,9 @@ const uploadImage = ((file) => {
   <main>
     <h1>Como funciona a plataforma?</h1>
     <p>Faça o upload de uma imagem através do botão ou arraste na área abaixo</p>
-    <input type="file" name="" id="">
+    <input type="file" @change="buttonFileLoad" acept="image/png, image/jpeg, image/webp" name="" id="">
     <div class="drop-zone-container">
-      <div @drop.prevent="dropZoneAction" @dragenter.preven @dragover.prevent class="drop-zone">
+      <div @drop.prevent="dropZoneAction" @dragenter.prevent @dragover.prevent class="drop-zone">
         <img src="../assets/folder.svg" alt="Pasta de escritório" id="imgFolder">
         <p id="dropZoneMsg">Arraste sua imagem aqui</p>
       </div>
