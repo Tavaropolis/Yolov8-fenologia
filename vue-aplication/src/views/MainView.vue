@@ -55,10 +55,29 @@ const uploadImage = (async (image) => {
       }
     })
 
+    const { data } = response;
+    calculateResult();
     console.log(response);
   } catch(e) {
     console.log(e);
     throw new Error("Failed in request image");
+  }
+})
+
+const calculateResult = (async () => {
+  try {
+    const response = await axios({
+      method: "POST",
+      url: "https://deteccao-floracao-flask-python.vercel.app/",
+      headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Access-Control-Allow-Origin": "*"
+      }
+    })
+
+    console.log(response);
+  } catch (e) {
+
   }
 })
 </script>
