@@ -1,8 +1,9 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
+import base64
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173/", "https://mask-rcnn-aplicado-a-fenologiade-s77h.vercel.app/"])
+CORS(app)
 
 @app.route("/", methods=['GET', 'POST'])
 def hello():
@@ -15,7 +16,15 @@ def hello():
 def show_name(myname):
     return f"Seu nome é {myname}"
 
-@app.route('/add/<int:number>/<int:number2>')
-def add(number: int, number2: int):
-    return f"A soma dos números é {number + number2}"
+@app.route('/imagetopython', methods=["POST"])
+def image_to_python():
+    data = request.get_json()
+
+    image = base64.base64decode(data['image'])
+    image = base64.base64encode(image)
+
+    return jsonify({
+        "result": "Hello My Dear",
+        "imageBase64": image
+    })
 
