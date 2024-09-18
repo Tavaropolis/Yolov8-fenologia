@@ -10,3 +10,7 @@ export const useCounterStore = defineStore('counter', () => {
 
   return { count, doubleCount, increment }
 })
+
+export const useBase64Img = defineStore('base64Img', () => {
+  const base64Img = ref("");
+})
