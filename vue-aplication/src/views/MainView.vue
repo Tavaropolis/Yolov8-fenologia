@@ -75,7 +75,7 @@ const calculateResult = (async (image) => {
   try {
     const response = await axios({
       method: "POST",
-      url: "https://deteccao-floracao-flask-python.vercel.app/imagetopython",
+      url: "https://deteccao-floracao-flask-python.vercel.app/api/imagetopython",
       headers: {
           "Access-Control-Allow-Origin": "*"
       },
