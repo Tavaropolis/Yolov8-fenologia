@@ -5,20 +5,17 @@ import numpy as np
 import cv2
 
 app = Flask(__name__)
-CORS(app)
+cors = CORS(app, resources={r"/api/*": {'origins': ['http://localhost:5173', 'https://trabalho-conclusao-git-70c7bb-gabriel-tavares-projects-224c2f44.vercel.app']}})
 
 @app.route("/", methods=['GET', 'POST'])
-def hello():
-    if request.method == 'GET':
-        return "Bão dia so"
-    else:
-        return "Hello, World!"
+def home_path():
+    return "Página inicial da API de Yolov8 aplicado a fenologia"
 
-@app.route('/name/<string:myname>')
-def show_name(myname):
-    return f"Seu nome é {myname}"
+@app.route('/sobre', methods=['GET', 'POST'])
+def about_path():
+    return "Projeto desenvolvido como TCC do curso de Análise e Desenvolvimento de Sistemas pelo Instituto Federal de SP - Campus Capivari"
 
-@app.route('/imagetopython', methods=["POST"])
+@app.route('/api/imagetopython', methods=["POST"])
 def image_to_python():
     data = request.get_json()
 
