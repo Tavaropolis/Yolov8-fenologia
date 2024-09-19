@@ -5,7 +5,7 @@ import numpy as np
 import cv2
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/api/*": {'origins': ['http://localhost:5173', 'https://trabalho-conclusao-git-70c7bb-gabriel-tavares-projects-224c2f44.vercel.app']}})
+CORS(app)
 
 @app.route("/", methods=['GET', 'POST'])
 def home_path():
