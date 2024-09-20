@@ -54,7 +54,8 @@ const toBase64 = ((file) => {
 const uploadImage = (async (image) => {
   try {
     isActive.value = !isActive.value;
-    isLoader.value = !isLoader.value
+    isLoader.value = !isLoader.value;
+
     const response = await axios({
       method: "POST",
       url: "https://detect.roboflow.com/fenologia-tcc/3",
@@ -67,8 +68,24 @@ const uploadImage = (async (image) => {
           "Access-Control-Allow-Origin": "*"
       }
     })
+    
+    let { width, height } = response.data.image;
 
-    calculateResult(image);
+    let predictions = response.data.predictions[0].points;
+
+    predictions = predictions.map((point) => {
+        return [point.x, point.y];
+    })
+
+    const payload = {
+      image,
+      width,
+      height, 
+      predictions,
+      "confidence": response.data.predictions[0].confidence
+    }
+
+    calculateResult(payload);
 
   } catch(e) {
     isActive.value = !isActive.value;
@@ -77,7 +94,7 @@ const uploadImage = (async (image) => {
   }
 })
 
-const calculateResult = (async (image) => {
+const calculateResult = (async (payload) => {
   try {
     const response = await axios({
       method: "POST",
@@ -85,9 +102,7 @@ const calculateResult = (async (image) => {
       headers: {
           "Access-Control-Allow-Origin": "*"
       },
-      data: {
-        "image": image 
-      }
+      data: payload
     })
 
     showResult(response);
@@ -135,6 +150,7 @@ const showResult = (async (request) => {
 <style scoped>
 .main-container {
   height: 60vh;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -154,7 +170,8 @@ const showResult = (async (request) => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center
+  align-items: center;
+  margin-top: 10vh;
 }
 
 .drop-zone:hover {
@@ -170,7 +187,10 @@ input[type=file] {
 }
 
 .loading-container {
+  height: 100vh;
   display: flex;
-  justify-content: center
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>
