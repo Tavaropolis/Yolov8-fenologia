@@ -74,6 +74,7 @@ import AboutFeno from '../components/AboutFeno.vue';
 a {
     color: var( --color-text);
     text-decoration: none;
+    font-weight: bold;
 }
 
 a:hover {

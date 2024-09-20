@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useBase64Img } from '../stores/counter'
 import axios from 'axios';
@@ -6,6 +7,8 @@ import NavBar from "../components/NavBar.vue"
 
 const router = useRouter();
 const store = useBase64Img();
+let isLoader = ref(false);
+let isActive = ref(true);
 
 //Função para enviar a imagem através do botão
 const buttonFileLoad = (async (e) => {
@@ -37,7 +40,7 @@ const dropZoneAction = (async (e) => {
 })
 
 
-const toBase64 = ( (file) => {
+const toBase64 = ((file) => {
   return new Promise ((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -50,6 +53,8 @@ const toBase64 = ( (file) => {
 
 const uploadImage = (async (image) => {
   try {
+    isActive.value = !isActive.value;
+    isLoader.value = !isLoader.value
     const response = await axios({
       method: "POST",
       url: "https://detect.roboflow.com/fenologia-tcc/3",
@@ -66,7 +71,8 @@ const uploadImage = (async (image) => {
     calculateResult(image);
 
   } catch(e) {
-    console.log(e)
+    isActive.value = !isActive.value;
+    isLoader.value = !isLoader.value;
     throw new Error("Failed in request image");
   }
 })
@@ -75,7 +81,7 @@ const calculateResult = (async (image) => {
   try {
     const response = await axios({
       method: "POST",
-      url: "https://deteccao-floracao-flask-python.vercel.app/api/imagetopython",
+      url: "http://localhost:5000/api/imagetopython",
       headers: {
           "Access-Control-Allow-Origin": "*"
       },
@@ -86,33 +92,54 @@ const calculateResult = (async (image) => {
 
     showResult(response);
   } catch (e) {
-    console.log(e)
+    isActive.value = !isActive.value;
+    isLoader.value = !isLoader.value;
+    throw new Error("Error in calculate image");
   }
 })
 
 const showResult = (async (request) => {
-  store.base64Img = await request.data.imageBase64;
-
-  router.push({path: "/resultado"});
+  try {
+    store.base64Img = await request.data.imageBase64;
+  
+    router.push({path: "/resultado"});
+  } catch(e) {
+    isActive.value = !isActive.value;
+    isLoader.value = !isLoader.value;
+  }
 })
 </script>
 
 <template>
   <NavBar/>
   <main>
-    <h1>Como funciona a plataforma?</h1>
-    <p>Faça o upload de uma imagem através do botão ou arraste na área abaixo</p>
-    <input type="file" @change="buttonFileLoad" acept="image/png, image/jpeg, image/webp" name="" id="">
-    <div class="drop-zone-container">
-      <div @drop.prevent="dropZoneAction" @dragenter.prevent @dragover.prevent class="drop-zone">
-        <img src="../assets/folder.svg" alt="Pasta de escritório" id="imgFolder">
-        <p id="dropZoneMsg">Arraste sua imagem aqui</p>
+    <div v-if="isActive" class="main-container">
+      <h1>Como funciona a plataforma?</h1>
+      <div>
+        <p>Faça o upload de uma imagem através do botão ou arraste na área abaixo</p>
+        <input type="file" @change="buttonFileLoad" acept="image/png, image/jpeg, image/webp" name="" id="">
       </div>
+      <div class="drop-zone-container">
+        <div @drop.prevent="dropZoneAction" @dragenter.prevent @dragover.prevent class="drop-zone">
+          <img src="../assets/folder.svg" alt="Pasta de escritório" id="imgFolder">
+          <p id="dropZoneMsg">Arraste sua imagem aqui</p>
+        </div>
+      </div>
+    </div>
+    <div v-if="isLoader" class="loading-container">
+      <img src="../assets/loading.svg" alt="Bola quicando"></img>
     </div>
   </main>
 </template>
 
 <style scoped>
+.main-container {
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 .drop-zone-container {
   display: flex;
   flex-direction: column;
@@ -130,7 +157,20 @@ const showResult = (async (request) => {
   align-items: center
 }
 
+.drop-zone:hover {
+  border-color: var( --color-text-focus)
+}
+
 .drop-zone img{
   width: 10vw;
+}
+
+input[type=file] {
+  border-radius: 5px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center
 }
 </style>
