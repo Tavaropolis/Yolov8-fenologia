@@ -3,6 +3,7 @@ from flask_cors import CORS
 import base64
 import numpy as np
 import cv2
+import re
 
 app = Flask(__name__)
 CORS(app)
@@ -25,6 +26,7 @@ def image_to_python():
         image_prefix = image_string.split(',')[0] #Pega o prefixo do base64
         image_string = image_string.split(',')[1] #Pega o corpo do base64
         image_string = base64.b64decode(image_string)
+        file_extension = re.findall("png|jpg|jpeg|webp", image_prefix)[0]
         np_array = np.frombuffer(image_string, dtype=np.uint8)
         cv2_img = cv2.imdecode(np_array, flags=cv2.IMREAD_COLOR)
     except:
@@ -50,7 +52,7 @@ def image_to_python():
 
     # Imagem para Base64  
     try:
-        _, im_arr = cv2.imencode('.webp', cv2_img)  # im_arr: image in Numpy one-dim array format.
+        _, im_arr = cv2.imencode(f'.{file_extension}', cv2_img)  # im_arr: image in Numpy one-dim array format.
         im_bytes = im_arr.tobytes()
         im_b64 = base64.b64encode(im_bytes).decode('utf-8')
 
