@@ -25,7 +25,7 @@ import { RouterLink } from 'vue-router';
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 20px;
     background: var(--color-navbar);
 }
 
@@ -44,6 +44,7 @@ ul {
 
 ul li a {
     color: var( --color-text);
+    font-weight: bold;
     text-decoration: none;
 }
 

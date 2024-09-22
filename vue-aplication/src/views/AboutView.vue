@@ -72,6 +72,7 @@ import AboutRCNN from "../components/AboutRCNN.vue"
 a {
     color: var( --color-text);
     text-decoration: none;
+    font-weight: bold;
 }
 
 a:hover {
