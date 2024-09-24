@@ -1,12 +1,12 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useBase64Img } from '../stores/counter'
+import { imgStore } from '../stores/counter'
 import axios from 'axios';
 import NavBar from "../components/NavBar.vue"
 
 const router = useRouter();
-const store = useBase64Img();
+const store = imgStore();
 let isLoader = ref(false);
 let isActive = ref(true);
 
@@ -58,9 +58,10 @@ const uploadImage = (async (image) => {
 
     const response = await axios({
       method: "POST",
-      url: "https://detect.roboflow.com/fenologia-tcc/3",
+      url: "https://detect.roboflow.com/fenologia-tcc/4",
       params: {
-          api_key: "xrqu1dH2PN1Ga56djekh"
+          api_key: "xrqu1dH2PN1Ga56djekh",
+          confidence: 80
       },
       data: image,
       headers: {
@@ -115,7 +116,9 @@ const calculateResult = (async (payload) => {
 
 const showResult = (async (request) => {
   try {
-    store.base64Img = await request.data.imageBase64;
+    store.imgResult.base64Img = await request.data.imageBase64;
+    store.imgResult.confidence = await request.data.confidence;
+    store.imgResult.leaf_index = await request.data.leaf_index;
   
     router.push({path: "/resultado"});
   } catch(e) {
