@@ -30,7 +30,7 @@ const dropZoneAction = (async (e) => {
     throw new Error("More than one file"); 
   }
 
-  if(e.dataTransfer.items[0].type !== 'image/jpeg' && e.dataTransfer.items[0].type !== 'image/png' && e.dataTransfer.items[0].type !== 'image/webp') {
+  if(e.dataTransfer.items[0].type !== 'image/jpg' && e.dataTransfer.items[0].type !== 'image/jpeg' && e.dataTransfer.items[0].type !== 'image/png' && e.dataTransfer.items[0].type !== 'image/webp') {
     dropZoneMsg.innerText = "Erro: Não é uma imagem";
     throw new Error("Not an image"); 
   }
