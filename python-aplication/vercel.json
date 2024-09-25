@@ -14,7 +14,7 @@
         "dest": "/api/app.py"
       },
       {
-        "src": "/sobe",
+        "src": "/sobre",
         "methods": ["POST", "GET"],
         "dest": "/api/app.py"
       },
