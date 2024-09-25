@@ -10,6 +10,17 @@
     "routes": [
       {
         "src": "/",
+        "methods": ["POST", "GET"],
+        "dest": "/api/app.py"
+      },
+      {
+        "src": "/sobe",
+        "methods": ["POST", "GET"],
+        "dest": "/api/app.py"
+      },
+      {
+        "src": "/imagetopython",
+        "methods": ["POST"],
         "dest": "/api/app.py"
       }
     ]
