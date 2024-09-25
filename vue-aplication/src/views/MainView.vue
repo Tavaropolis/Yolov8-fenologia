@@ -99,7 +99,7 @@ const calculateResult = (async (payload) => {
   try {
     const response = await axios({
       method: "POST",
-      url: "http://localhost:5000/api/imagetopython",
+      url: "http://localhost:5000/imagetopython",
       headers: {
           "Access-Control-Allow-Origin": "*"
       },

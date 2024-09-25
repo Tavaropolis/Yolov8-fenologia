@@ -16,7 +16,7 @@ def home_path():
 def about_path():
     return "Projeto desenvolvido como TCC do curso de Análise e Desenvolvimento de Sistemas pelo Instituto Federal de SP - Campus Capivari", 200
 
-@app.route('/api/imagetopython', methods=["POST"])
+@app.route('/imagetopython', methods=["POST"])
 def image_to_python():
     data = request.get_json()
 
