@@ -56,8 +56,8 @@ def image_to_python():
     #Analisando a intensidade foliar
     try:
         hsv_img = cv2.cvtColor(cv2_img_mask,  cv2.COLOR_BGR2HSV) #Transforma imagem em HSV
-        lower_hsv = np.array([0, 51, 0]) #Tons fortes de verde
-        upper_hsv = np.array([204, 255, 204]) #Tons fracos de verde
+        lower_hsv = np.array([35, 10, 10]) #Tons fortes de verde
+        upper_hsv = np.array([90, 255, 255]) #Tons fracos de verde
 
         green_mask = cv2.inRange(hsv_img, lower_hsv, upper_hsv)
         leaf_index = (round(np.count_nonzero(green_mask) / np.count_nonzero(treetop_mask) * 100, 1)) #Calcula intensidade foliar
