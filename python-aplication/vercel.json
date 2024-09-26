@@ -12,6 +12,7 @@
         "src": "/",
         "methods": ["POST", "GET", "OPTIONS"],
         "dest": "/api/app.py",
+        "status": 200,
         "headers":  {
           "Access-Control-Allow-Origin": "*"
         }
@@ -20,6 +21,7 @@
         "src": "/sobre",
         "methods": ["POST", "GET", "OPTIONS"],
         "dest": "/api/app.py",
+        "status": 200,
         "headers":  {
           "Access-Control-Allow-Origin": "*"
         }
@@ -28,6 +30,7 @@
         "src": "/imagetopython",
         "methods": ["POST", "OPTIONS"],
         "dest": "/api/app.py",
+        "status": 200,
         "headers":  {
           "Access-Control-Allow-Origin": "*"
         }
