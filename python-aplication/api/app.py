@@ -6,7 +6,7 @@ import base64
 import re
 
 app = Flask(__name__)
-CORS(app, origins=['https://yolov8-fenologia.vercel.app/'])
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route("/", methods=['GET', 'POST'])
 def home_path():
