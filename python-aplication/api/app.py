@@ -8,15 +8,15 @@ import re
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST", "OPTIONS"]}})
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST', "OPTIONS"])
 def home_path():
     return "Página inicial da API de Yolov8 aplicado a fenologia", 200
 
-@app.route('/sobre', methods=['GET', 'POST'])
+@app.route('/sobre', methods=['GET', 'POST', "OPTIONS"])
 def about_path():
     return "Projeto desenvolvido como TCC do curso de Análise e Desenvolvimento de Sistemas pelo Instituto Federal de SP - Campus Capivari", 200
 
-@app.route('/imagetopython', methods=["POST"])
+@app.route('/imagetopython', methods=["POST", "OPTIONS"])
 def image_to_python():
     data = request.get_json()
 

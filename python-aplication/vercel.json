@@ -10,7 +10,7 @@
     "routes": [
       {
         "src": "/",
-        "methods": ["POST", "GET"],
+        "methods": ["POST", "GET", "OPTIONS"],
         "dest": "/api/app.py",
         "headers":  {
           "Access-Control-Allow-Origin": "*"
@@ -18,7 +18,7 @@
       },
       {
         "src": "/sobre",
-        "methods": ["POST", "GET"],
+        "methods": ["POST", "GET", "OPTIONS"],
         "dest": "/api/app.py",
         "headers":  {
           "Access-Control-Allow-Origin": "*"
@@ -26,7 +26,7 @@
       },
       {
         "src": "/imagetopython",
-        "methods": ["POST"],
+        "methods": ["POST", "OPTIONS"],
         "dest": "/api/app.py",
         "headers":  {
           "Access-Control-Allow-Origin": "*"
