@@ -7,15 +7,36 @@
         "config": { "runtime": "python3.9" }
       }
     ],
-    "headers": [
+    "routes": [
       {
-        "source": "/(.*)",
-        "headers": [
-          { "key": "Access-Control-Allow-Credentials", "value": "true" },
-          { "key": "Access-Control-Allow-Origin", "value": "*" },
-          { "key": "Access-Control-Allow-Methods", "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
-          { "key": "Access-Control-Allow-Headers", "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" }
-        ]
+        "src": "/",
+        "methods": ["POST", "GET"],
+        "dest": "/api/app.py",
+        "headers":  {
+          "Access-control-allow-origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST",
+          "Access-Control-Allow-Headers": "Content-Type"
+        }
+      },
+      {
+        "src": "/sobre",
+        "methods": ["POST", "GET"],
+        "dest": "/api/app.py",
+        "headers":  {
+          "Access-control-allow-origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST",
+          "Access-Control-Allow-Headers": "Content-Type"
+        }
+      },
+      {
+        "src": "/imagetopython",
+        "methods": ["POST"],
+        "dest": "/api/app.py",
+        "headers":  {
+          "Access-control-allow-origin": "*",
+          "Access-Control-Allow-Methods": "POST",
+          "Access-Control-Allow-Headers": "Content-Type"
+        }
       }
     ]
   }
