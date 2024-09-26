@@ -65,8 +65,7 @@ const uploadImage = (async (image) => {
       },
       data: image,
       headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "Access-Control-Allow-Origin": "*"
+          "Content-Type": "application/x-www-form-urlencoded"
       }
     })
     
@@ -101,7 +100,8 @@ const calculateResult = (async (payload) => {
       method: "POST",
       url: "https://yolov8-fenologia-flask.vercel.app/imagetopython",
       headers: {
-          "Access-Control-Allow-Origin": "*"
+          "Content-Type": "application/json"
+
       },
       data: payload
     })
