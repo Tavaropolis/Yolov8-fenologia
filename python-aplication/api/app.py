@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 import numpy as np
 import cv2
@@ -10,11 +10,13 @@ CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST", "OPTIONS
 
 @app.route("/", methods=['GET', 'POST', "OPTIONS"])
 def home_path():
-    return "Página inicial da API de Yolov8 aplicado a fenologia", 200
+    response = make_response("Página inicial da API de Yolov8 aplicado a fenologia", 200)
+    return response
 
 @app.route('/sobre', methods=['GET', 'POST', "OPTIONS"])
 def about_path():
-    return "Projeto desenvolvido como TCC do curso de Análise e Desenvolvimento de Sistemas pelo Instituto Federal de SP - Campus Capivari", 200
+    response = make_response("Projeto desenvolvido como TCC do curso de Análise e Desenvolvimento de Sistemas pelo Instituto Federal de SP - Campus Capivari", 200)
+    return response
 
 @app.route('/imagetopython', methods=["POST", "OPTIONS"])
 def image_to_python():
@@ -70,11 +72,13 @@ def image_to_python():
         im_bytes = im_arr.tobytes()
         im_b64 = base64.b64encode(im_bytes).decode('utf-8')
 
-        return jsonify({
+        response = make_response(jsonify({
             "imageBase64": f"{image_prefix},{im_b64}",
             "confidence": image_confidence,
             "leaf_index" : leaf_index
-        }), 200
+        }), 200)
+
+        return response
     except: 
         return "Erro na reconversão da imagem", 500
 
