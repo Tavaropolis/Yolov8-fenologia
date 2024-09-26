@@ -20,6 +20,14 @@ def about_path():
 
 @app.route('/imagetopython', methods=["POST", "OPTIONS"])
 def image_to_python():
+    if request.method == 'OPTIONS':
+         # Responder à requisição de pré-vôo
+        response = make_response('', 200)
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        return response
+    
     data = request.get_json()
 
     # Base64 para Imagem
