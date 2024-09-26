@@ -7,23 +7,6 @@
         "config": { "runtime": "python3.9" }
       }
     ],
-    "routes": [
-      {
-        "src": "/",
-        "methods": ["POST", "GET"],
-        "dest": "/api/app.py"
-      },
-      {
-        "src": "/sobre",
-        "methods": ["POST", "GET"],
-        "dest": "/api/app.py"
-      },
-      {
-        "src": "/imagetopython",
-        "methods": ["POST"],
-        "dest": "/api/app.py"
-      }
-    ],
     "headers": [
       {
         "source": "/(.*)",
