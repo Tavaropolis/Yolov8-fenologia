@@ -85,6 +85,7 @@ const uploadImage = (async (image) => {
       "confidence": response.data.predictions[0].confidence
     }
 
+    console.log(payload)
     calculateResult(payload);
 
   } catch(e) {
