@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import numpy as np
 import cv2
@@ -70,15 +70,11 @@ def image_to_python():
         im_bytes = im_arr.tobytes()
         im_b64 = base64.b64encode(im_bytes).decode('utf-8')
 
-        response = make_response(jsonify({
+        return jsonify({
             "imageBase64": f"{image_prefix},{im_b64}",
             "confidence": image_confidence,
             "leaf_index" : leaf_index
-        }), 200)
-
-        response.headers['Access-Control-Allow-Origin'] = '*'
-        
-        return response
+        }), 200
     except: 
         return "Erro na reconversão da imagem", 500
 
