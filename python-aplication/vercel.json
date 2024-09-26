@@ -13,9 +13,9 @@
         "methods": ["POST", "GET"],
         "dest": "/api/app.py",
         "headers":  {
-          "Access-control-allow-origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST",
-          "Access-Control-Allow-Headers": "Content-Type"
+          "access-control-allow-origin": "*",
+          "access-control-allow-methods": "GET, POST",
+          "access-control-allow-headers": "Content-Type"
         }
       },
       {
@@ -23,9 +23,9 @@
         "methods": ["POST", "GET"],
         "dest": "/api/app.py",
         "headers":  {
-          "Access-control-allow-origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST",
-          "Access-Control-Allow-Headers": "Content-Type"
+          "access-control-allow-origin": "*",
+          "access-control-allow-methods": "GET, POST",
+          "access-control-allow-headers": "Content-Type"
         }
       },
       {
@@ -33,9 +33,9 @@
         "methods": ["POST"],
         "dest": "/api/app.py",
         "headers":  {
-          "Access-control-allow-origin": "*",
-          "Access-Control-Allow-Methods": "POST",
-          "Access-Control-Allow-Headers": "Content-Type"
+          "access-control-allow-origin": "*",
+          "access-control-allow-methods": "POST",
+          "access-control-allow-headers": "Content-Type"
         }
       }
     ]
