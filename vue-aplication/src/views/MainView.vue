@@ -99,7 +99,7 @@ const calculateResult = (async (payload) => {
   try {
     const response = await axios({
       method: "POST",
-      url: "http://localhost:5000/imagetopython",
+      url: "https://yolov8-fenologia-flask-nu6pqmq09.vercel.app/imagetopython",
       headers: {
           "Access-Control-Allow-Origin": "*"
       },
