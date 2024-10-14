@@ -1,14 +1,20 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { imgStore } from '../stores/counter'
+import { imgStore } from '../stores/counter';
+import { onClickOutside } from '@vueuse/core'
 import axios from 'axios';
 import NavBar from "../components/NavBar.vue"
+import ErrorModal from '@/components/ErrorModal.vue';
 
 const router = useRouter();
 const store = imgStore();
 let isLoader = ref(false);
 let isActive = ref(true);
+
+let errorModal = ref(null);
+let isError = ref(false);
+let errorMsg = ref("");
 
 //Função para enviar a imagem através do botão
 const buttonFileLoad = (async (e) => {
@@ -21,17 +27,20 @@ const dropZoneAction = (async (e) => {
   const dropZoneMsg = document.getElementById("dropZoneMsg");
 
   if(e.dataTransfer.items[0].kind !== "file") {
-    dropZoneMsg.innerText = "Erro: Não é um arquivo";
+    isError.value = !isError.value;
+    errorMsg.value = "Erro: Não é um arquivo";
     throw new Error("Not a file");
   };
 
   if(e.dataTransfer.items.length > 1) {
-    dropZoneMsg.innerText = "Erro: Mais de um arquivo";
+    isError.value = !isError.value;
+    errorMsg.value = "Erro: Mais de um arquivo";
     throw new Error("More than one file"); 
   }
 
   if(e.dataTransfer.items[0].type !== 'image/jpg' && e.dataTransfer.items[0].type !== 'image/jpeg' && e.dataTransfer.items[0].type !== 'image/png' && e.dataTransfer.items[0].type !== 'image/webp') {
-    dropZoneMsg.innerText = "Erro: Não é uma imagem";
+    isError.value = !isError.value;
+    errorMsg.value = "Erro: Não é uma imagem";
     throw new Error("Not an image"); 
   }
 
@@ -90,6 +99,8 @@ const uploadImage = (async (image) => {
   } catch(e) {
     isActive.value = !isActive.value;
     isLoader.value = !isLoader.value;
+    isError.value = !isError.value;
+    errorMsg.value = "Failed in request image"; 
     throw new Error("Failed in request image");
   }
 })
@@ -110,6 +121,8 @@ const calculateResult = (async (payload) => {
   } catch (e) {
     isActive.value = !isActive.value;
     isLoader.value = !isLoader.value;
+    isError.value = !isError.value;
+    errorMsg.value = "Error in calculate image";
     throw new Error("Error in calculate image");
   }
 })
@@ -124,8 +137,12 @@ const showResult = (async (request) => {
   } catch(e) {
     isActive.value = !isActive.value;
     isLoader.value = !isLoader.value;
+    isError.value = !isError.value;
+    errorMsg.value = "Error in fetch store";
   }
 })
+
+onClickOutside(errorModal, () => isError.value = !isError.value);
 </script>
 
 <template>
@@ -147,12 +164,13 @@ const showResult = (async (request) => {
     <div v-if="isLoader" class="loading-container">
       <img src="../assets/loading.svg" alt="Bola quicando"></img>
     </div>
+    <ErrorModal v-if="isError" ref="errorModal" :msg="errorMsg"/>
   </main>
 </template>
 
 <style scoped>
 .main-container {
-  height: 60vh;
+  min-height: 60vh;
   padding: 10px;
   display: flex;
   flex-direction: column;

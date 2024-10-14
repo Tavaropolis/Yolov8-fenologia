@@ -21,6 +21,7 @@
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 
   --vt-c-light-green: #3ea657;
+  --vt-c-dark-red: #e71515;
 }
 
 /* semantic color variables for this project */
@@ -37,6 +38,7 @@
   --color-text-focus: var(--vt-c-text-dark-2);
 
   --color-navbar: var(--vt-c-light-green);
+  --color-error-modal: var(--vt-c-dark-red);
 
   --section-gap: 160px;
 }
